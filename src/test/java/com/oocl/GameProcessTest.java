@@ -1,7 +1,6 @@
 package com.oocl;
 
 import com.oocl.exception.GuessNumberDuplicateNumberException;
-import com.oocl.exception.GuessNumberGameOverException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 import org.junit.After;
 import org.junit.Assert;
@@ -36,9 +35,11 @@ public class GameProcessTest {
         System.setIn(inputStream);
     }
 
-    @Test(expected = GuessNumberGameOverException.class)
+    @Test
     public void test_play_when_win_then_throwGuessNumberGameOverException() throws Exception {
         Calculator calculator = Mockito.mock(Calculator.class);
+        Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
+                .thenReturn("4A0B");
         Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
                 .thenReturn(true);
 
@@ -46,11 +47,14 @@ public class GameProcessTest {
 
         GameProcess gameProcess = new GameProcess();
         gameProcess.play(calculator, new Generator());
+        Assert.assertEquals("4A0B" + System.lineSeparator() + "Game Over" + System.lineSeparator(), outContent.toString());
     }
 
-    @Test(expected = GuessNumberGameOverException.class)
+    @Test
     public void test_play_when_lose_then_throwGuessNumberGameOverException() throws Exception {
         Calculator calculator = Mockito.mock(Calculator.class);
+        Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
+                .thenReturn("4A0B");
         Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
                 .thenReturn(false)
                 .thenReturn(false)
@@ -68,6 +72,14 @@ public class GameProcessTest {
 
         GameProcess gameProcess = new GameProcess();
         gameProcess.play(calculator, new Generator());
+        String expected = "4A0B" + System.lineSeparator() +
+                "4A0B" + System.lineSeparator() +
+                "4A0B" + System.lineSeparator() +
+                "4A0B" + System.lineSeparator() +
+                "4A0B" + System.lineSeparator() +
+                "4A0B" + System.lineSeparator() +
+                "Game Over" + System.lineSeparator();
+        Assert.assertEquals(expected, outContent.toString());
     }
 
     @Test
@@ -80,12 +92,9 @@ public class GameProcessTest {
 
         input("1 2 3 4" + System.lineSeparator());
 
-        try {
-            GameProcess gameProcess = new GameProcess();
-            gameProcess.play(calculator, new Generator());
-        } catch (GuessNumberGameOverException e) {
-            Assert.assertEquals("4A0B" + System.lineSeparator() ,outContent.toString());
-        }
+        GameProcess gameProcess = new GameProcess();
+        gameProcess.play(calculator, new Generator());
+        Assert.assertEquals("4A0B" + System.lineSeparator() + "Game Over" + System.lineSeparator(), outContent.toString());
     }
 
     @Test
@@ -98,12 +107,9 @@ public class GameProcessTest {
 
         input("1 1 3 4" + System.lineSeparator());
 
-        try {
-            GameProcess gameProcess = new GameProcess();
-            gameProcess.play(calculator, new Generator());
-        } catch (GuessNumberGameOverException e) {
-            Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() ,outContent.toString());
-        }
+        GameProcess gameProcess = new GameProcess();
+        gameProcess.play(calculator, new Generator());
+        Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() + "Game Over" + System.lineSeparator(), outContent.toString());
     }
 
     @Test
@@ -116,11 +122,8 @@ public class GameProcessTest {
 
         input("1 1 3" + System.lineSeparator());
 
-        try {
-            GameProcess gameProcess = new GameProcess();
-            gameProcess.play(calculator, new Generator());
-        } catch (GuessNumberGameOverException e) {
-            Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() ,outContent.toString());
-        }
+        GameProcess gameProcess = new GameProcess();
+        gameProcess.play(calculator, new Generator());
+        Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() + "Game Over" + System.lineSeparator(), outContent.toString());
     }
 }

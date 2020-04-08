@@ -1,7 +1,6 @@
 package com.oocl;
 
 import com.oocl.exception.GuessNumberDuplicateNumberException;
-import com.oocl.exception.GuessNumberGameOverException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 
 import java.util.ArrayList;
@@ -14,8 +13,9 @@ public class GameProcess {
     private final static int MAX_ATTEMPT = 6;
     private Scanner scanner = new Scanner(System.in);
     private final static String RETRY_MESSAGE = "Wrong Input, Input again";
+    private final static String END_MESSAGE = "Game Over";
 
-    public void play(Calculator calculator, Generator generator) throws GuessNumberGameOverException, GuessNumberDuplicateNumberException, GuessNumberInputSizeNotMatchException {
+    public void play(Calculator calculator, Generator generator) {
         List<Integer> answer = generator.generateAnswer(NUMBER_LIST_SIZE);
 
         boolean gameover = false;
@@ -37,7 +37,7 @@ public class GameProcess {
             }
         }
 
-        throw new GuessNumberGameOverException();
+        System.out.println(END_MESSAGE);
     }
 
     private List<Integer> parseGuess(String guess) {
