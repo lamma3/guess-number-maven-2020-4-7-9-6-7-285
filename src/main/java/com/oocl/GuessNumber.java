@@ -1,19 +1,29 @@
 package com.oocl;
 
+import com.oocl.exception.GuessNumberDuplicateNumberException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class GuessNumber {
 
-    public String calculateFeedback(List<Integer> answer, List<Integer> guess) throws GuessNumberInputSizeNotMatchException {
-        if(answer.size() != guess.size()) {
+    public String calculateFeedback(List<Integer> answer, List<Integer> guess) throws GuessNumberInputSizeNotMatchException, GuessNumberDuplicateNumberException {
+        if (answer.size() != guess.size()) {
             throw new GuessNumberInputSizeNotMatchException();
+        }
+        if (containsDuplicateNumber(answer)) {
+            throw new GuessNumberDuplicateNumberException();
         }
         int numOfCorrectNumber = getNumberOfCorrectNumber(answer, guess);
         int numOfCorrectPosition = getNumberOfCorrectPosition(answer, guess);
         return formatResult(numOfCorrectPosition, numOfCorrectNumber - numOfCorrectPosition);
+    }
+
+    private boolean containsDuplicateNumber(List<Integer> numberList) {
+        return numberList.stream()
+                .anyMatch(num -> Collections.frequency(numberList, num) > 1);
     }
 
     private int getNumberOfCorrectNumber(List<Integer> answer, List<Integer> guess) {
