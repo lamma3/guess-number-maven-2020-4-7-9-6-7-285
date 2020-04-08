@@ -10,6 +10,9 @@ import java.util.List;
 
 public class CalculatorTest {
 
+    private final static int NUMBER_LIST_SIZE = 4;
+    private final static String WIN_RESULT = "4A0B";
+
     @Test
     public void test_calculateFeedback_when_noCorrect_then_return0A0B() throws Exception {
         List<Integer> answer = new ArrayList<>();
@@ -114,5 +117,12 @@ public class CalculatorTest {
 
         Calculator calculator = new Calculator();
         calculator.calculateFeedback(answer, guess);
+    }
+
+    @Test
+    public void test_isWin_when_win_then_returnTrue() {
+        Calculator calculator = new Calculator();
+        boolean result = calculator.isWin(WIN_RESULT, NUMBER_LIST_SIZE);
+        Assert.assertTrue(result);
     }
 }

@@ -40,4 +40,8 @@ public class Calculator {
     private String formatResult(int numOfCorrectPosition, int numOfWrongPosition) {
         return String.format("%dA%dB", numOfCorrectPosition, numOfWrongPosition);
     }
+
+    public boolean isWin(String winResult, int numberListSize) {
+        return false;
+    }
 }
