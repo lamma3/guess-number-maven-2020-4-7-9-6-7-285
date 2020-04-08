@@ -1,5 +1,6 @@
 package com.oocl;
 
+import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -63,5 +64,18 @@ public class GuessNumberTest {
         GuessNumber guessNumber = new GuessNumber();
         String result = guessNumber.calculateFeedback(answer, guess);
         Assert.assertEquals("1A0B", result);
+    }
+
+    @Test(expected = GuessNumberInputSizeNotMatchException.class)
+    public void test_calculateFeedback_when_inputSizeNotMatch_then_throwGuessNumberInputSizeNotMatchException() {
+        List<Integer> answer = new ArrayList<>();
+        answer.add(0);
+
+        List<Integer> guess = new ArrayList<>();
+        guess.add(0);
+        guess.add(0);
+
+        GuessNumber guessNumber = new GuessNumber();
+        guessNumber.calculateFeedback(answer, guess);
     }
 }
