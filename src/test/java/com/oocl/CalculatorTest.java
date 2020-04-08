@@ -125,4 +125,11 @@ public class CalculatorTest {
         boolean result = calculator.isWin(WIN_RESULT, NUMBER_LIST_SIZE);
         Assert.assertTrue(result);
     }
+
+    @Test
+    public void test_isWin_when_lose_then_returnTrue() {
+        Calculator calculator = new Calculator();
+        boolean result = calculator.isWin("0A0B", NUMBER_LIST_SIZE);
+        Assert.assertFalse(result);
+    }
 }
