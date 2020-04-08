@@ -1,11 +1,16 @@
 package com.oocl;
 
+import com.oocl.exception.GuessNumberInputSizeNotMatchException;
+
 import java.util.List;
 import java.util.stream.IntStream;
 
 public class GuessNumber {
 
-    public String calculateFeedback(List<Integer> answer, List<Integer> guess) {
+    public String calculateFeedback(List<Integer> answer, List<Integer> guess) throws GuessNumberInputSizeNotMatchException {
+        if(answer.size() != guess.size()) {
+            throw new GuessNumberInputSizeNotMatchException();
+        }
         int numOfCorrectNumber = getNumberOfCorrectNumber(answer, guess);
         int numOfCorrectPosition = getNumberOfCorrectPosition(answer, guess);
         return formatResult(numOfCorrectPosition, numOfCorrectNumber - numOfCorrectPosition);

@@ -10,7 +10,7 @@ import java.util.List;
 public class GuessNumberTest {
 
     @Test
-    public void test_calculateFeedback_when_noCorrect_then_return0A0B() {
+    public void test_calculateFeedback_when_noCorrect_then_return0A0B() throws Exception {
         List<Integer> answer = new ArrayList<>();
         answer.add(0);
         answer.add(0);
@@ -29,7 +29,7 @@ public class GuessNumberTest {
     }
 
     @Test
-    public void test_calculateFeedback_when_1CorrectButWrongPosition_then_return0A1B() {
+    public void test_calculateFeedback_when_1CorrectButWrongPosition_then_return0A1B() throws Exception {
         List<Integer> answer = new ArrayList<>();
         answer.add(0);
         answer.add(0);
@@ -48,7 +48,7 @@ public class GuessNumberTest {
     }
 
     @Test
-    public void test_calculateFeedback_when_1CorrectPosition_then_return1A0B() {
+    public void test_calculateFeedback_when_1CorrectPosition_then_return1A0B() throws Exception {
         List<Integer> answer = new ArrayList<>();
         answer.add(0);
         answer.add(0);
@@ -67,7 +67,7 @@ public class GuessNumberTest {
     }
 
     @Test(expected = GuessNumberInputSizeNotMatchException.class)
-    public void test_calculateFeedback_when_inputSizeNotMatch_then_throwGuessNumberInputSizeNotMatchException() {
+    public void test_calculateFeedback_when_inputSizeNotMatch_then_throwGuessNumberInputSizeNotMatchException() throws Exception {
         List<Integer> answer = new ArrayList<>();
         answer.add(0);
 
