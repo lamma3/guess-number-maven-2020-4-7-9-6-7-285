@@ -41,7 +41,7 @@ public class Calculator {
         return String.format("%dA%dB", numOfCorrectPosition, numOfWrongPosition);
     }
 
-    public boolean isWin(String winResult, int numberListSize) {
-        return false;
+    public boolean isWin(String result, int size) {
+        return formatResult(size, 0).equals(result);
     }
 }
