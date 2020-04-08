@@ -10,4 +10,7 @@ public class App
     {
         System.out.println( "Hello World!" );
     }
+
+    public void play(Calculator calculator, Generator generator) {
+    }
 }
