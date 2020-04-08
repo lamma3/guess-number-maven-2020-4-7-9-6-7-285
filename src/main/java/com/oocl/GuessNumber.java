@@ -3,7 +3,7 @@ package com.oocl;
 import com.oocl.exception.GuessNumberDuplicateNumberException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -22,8 +22,7 @@ public class GuessNumber {
     }
 
     private boolean containsDuplicateNumber(List<Integer> numberList) {
-        return numberList.stream()
-                .anyMatch(num -> Collections.frequency(numberList, num) > 1);
+        return (new HashSet<>(numberList).size()) != numberList.size();
     }
 
     private int getNumberOfCorrectNumber(List<Integer> answer, List<Integer> guess) {
