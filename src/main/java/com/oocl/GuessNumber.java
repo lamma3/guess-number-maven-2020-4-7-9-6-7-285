@@ -13,7 +13,7 @@ public class GuessNumber {
         if (answer.size() != guess.size()) {
             throw new GuessNumberInputSizeNotMatchException();
         }
-        if (containsDuplicateNumber(answer)) {
+        if (containsDuplicateNumber(answer) || containsDuplicateNumber(guess)) {
             throw new GuessNumberDuplicateNumberException();
         }
         int numOfCorrectNumber = getNumberOfCorrectNumber(answer, guess);
