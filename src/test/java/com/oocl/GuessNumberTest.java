@@ -1,6 +1,7 @@
 package com.oocl;
 
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
+import com.oocl.exception.GuessNumberDuplicateNumberException;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -74,6 +75,24 @@ public class GuessNumberTest {
         List<Integer> guess = new ArrayList<>();
         guess.add(1);
         guess.add(2);
+
+        GuessNumber guessNumber = new GuessNumber();
+        guessNumber.calculateFeedback(answer, guess);
+    }
+
+    @Test(expected = GuessNumberDuplicateNumberException.class)
+    public void test_calculateFeedback_when_answerContainsDuplicateNumber_then_throwGuessNumberDuplicateNumberException() throws Exception {
+        List<Integer> answer = new ArrayList<>();
+        answer.add(1);
+        answer.add(1);
+        answer.add(1);
+        answer.add(1);
+
+        List<Integer> guess = new ArrayList<>();
+        guess.add(5);
+        guess.add(6);
+        guess.add(7);
+        guess.add(8);
 
         GuessNumber guessNumber = new GuessNumber();
         guessNumber.calculateFeedback(answer, guess);
