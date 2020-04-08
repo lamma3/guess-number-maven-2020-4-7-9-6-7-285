@@ -13,6 +13,7 @@ public class App {
     private final static int NUMBER_LIST_SIZE = 4;
     private final static int MAX_ATTEMPT = 6;
     private static Scanner scanner = new Scanner(System.in);
+    private final static String RETRY_MESSAGE = "Wrong Input, Input again";
 
     public static void main(String[] args) throws Exception {
         play(new Calculator(), new Generator());
@@ -26,13 +27,17 @@ public class App {
         while (!gameover && scanner.hasNextLine()) {
             String guess = scanner.nextLine();
             List<Integer> guessNumberList = parseGuess(guess);
-            String result = calculator.calculateFeedback(answer, guessNumberList);
-            System.out.println(result);
-            if (calculator.isWin(result, NUMBER_LIST_SIZE)) {
-                gameover = true;
-            }
-            if (++attempt >= MAX_ATTEMPT) {
-                gameover = true;
+            try {
+                String result = calculator.calculateFeedback(answer, guessNumberList);
+                System.out.println(result);
+                if (calculator.isWin(result, NUMBER_LIST_SIZE)) {
+                    gameover = true;
+                }
+                if (++attempt >= MAX_ATTEMPT) {
+                    gameover = true;
+                }
+            } catch (GuessNumberDuplicateNumberException | GuessNumberInputSizeNotMatchException e) {
+                System.out.println(RETRY_MESSAGE);
             }
         }
 
