@@ -40,4 +40,8 @@ public class GuessNumber {
     private String formatResult(int numOfCorrectPosition, int numOfWrongPosition) {
         return String.format("%dA%dB", numOfCorrectPosition, numOfWrongPosition);
     }
+
+    public List<Integer> generateAnswer(int size) {
+        return null;
+    }
 }

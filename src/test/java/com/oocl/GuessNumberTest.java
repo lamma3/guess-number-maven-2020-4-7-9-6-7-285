@@ -1,14 +1,17 @@
 package com.oocl;
 
-import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 import com.oocl.exception.GuessNumberDuplicateNumberException;
+import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class GuessNumberTest {
+
+    private final static int NUMBER_LIST_SIZE = 4;
 
     @Test
     public void test_calculateFeedback_when_noCorrect_then_return0A0B() throws Exception {
@@ -114,5 +117,15 @@ public class GuessNumberTest {
 
         GuessNumber guessNumber = new GuessNumber();
         guessNumber.calculateFeedback(answer, guess);
+    }
+
+    @Test
+    public void test_generateAnswer_when_called_then_returnDifferentRandomNumber() {
+        GuessNumber guessNumber = new GuessNumber();
+        List<Integer> numberList1 = guessNumber.generateAnswer(NUMBER_LIST_SIZE);
+        List<Integer> numberList2 = guessNumber.generateAnswer(NUMBER_LIST_SIZE);
+
+        Assert.assertEquals(NUMBER_LIST_SIZE, new HashSet<>(numberList1).size());
+        Assert.assertNotEquals(numberList2, numberList1);
     }
 }
