@@ -6,14 +6,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
-public class GuessNumberTest {
-
-    private final static int NUMBER_LIST_SIZE = 4;
-    private final static int MIN_RANDOM_NUMBER = 0;
-    private final static int MAX_RANDOM_NUMBER = 9;
+public class CalculatorTest {
 
     @Test
     public void test_calculateFeedback_when_noCorrect_then_return0A0B() throws Exception {
@@ -29,8 +24,8 @@ public class GuessNumberTest {
         guess.add(7);
         guess.add(8);
 
-        GuessNumber guessNumber = new GuessNumber();
-        String result = guessNumber.calculateFeedback(answer, guess);
+        Calculator calculator = new Calculator();
+        String result = calculator.calculateFeedback(answer, guess);
         Assert.assertEquals("0A0B", result);
     }
 
@@ -48,8 +43,8 @@ public class GuessNumberTest {
         guess.add(7);
         guess.add(1);
 
-        GuessNumber guessNumber = new GuessNumber();
-        String result = guessNumber.calculateFeedback(answer, guess);
+        Calculator calculator = new Calculator();
+        String result = calculator.calculateFeedback(answer, guess);
         Assert.assertEquals("0A1B", result);
     }
 
@@ -67,8 +62,8 @@ public class GuessNumberTest {
         guess.add(7);
         guess.add(8);
 
-        GuessNumber guessNumber = new GuessNumber();
-        String result = guessNumber.calculateFeedback(answer, guess);
+        Calculator calculator = new Calculator();
+        String result = calculator.calculateFeedback(answer, guess);
         Assert.assertEquals("1A0B", result);
     }
 
@@ -81,8 +76,8 @@ public class GuessNumberTest {
         guess.add(1);
         guess.add(2);
 
-        GuessNumber guessNumber = new GuessNumber();
-        guessNumber.calculateFeedback(answer, guess);
+        Calculator calculator = new Calculator();
+        calculator.calculateFeedback(answer, guess);
     }
 
     @Test(expected = GuessNumberDuplicateNumberException.class)
@@ -99,8 +94,8 @@ public class GuessNumberTest {
         guess.add(7);
         guess.add(8);
 
-        GuessNumber guessNumber = new GuessNumber();
-        guessNumber.calculateFeedback(answer, guess);
+        Calculator calculator = new Calculator();
+        calculator.calculateFeedback(answer, guess);
     }
 
     @Test(expected = GuessNumberDuplicateNumberException.class)
@@ -117,20 +112,7 @@ public class GuessNumberTest {
         guess.add(5);
         guess.add(5);
 
-        GuessNumber guessNumber = new GuessNumber();
-        guessNumber.calculateFeedback(answer, guess);
-    }
-
-    @Test
-    public void test_generateAnswer_when_called_then_returnDistinctRandomNumberFrom0To9() {
-        GuessNumber guessNumber = new GuessNumber();
-        List<Integer> numberList1 = guessNumber.generateAnswer(NUMBER_LIST_SIZE);
-        List<Integer> numberList2 = guessNumber.generateAnswer(NUMBER_LIST_SIZE);
-
-        for (Integer num: numberList1) {
-            Assert.assertTrue(num >= MIN_RANDOM_NUMBER && num <= MAX_RANDOM_NUMBER);
-        }
-        Assert.assertEquals(NUMBER_LIST_SIZE, new HashSet<>(numberList1).size());
-        Assert.assertNotEquals(numberList2, numberList1);
+        Calculator calculator = new Calculator();
+        calculator.calculateFeedback(answer, guess);
     }
 }
