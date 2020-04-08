@@ -3,11 +3,16 @@ package com.oocl;
 import com.oocl.exception.GuessNumberDuplicateNumberException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 public class GuessNumber {
+
+    private final static int MIN_RANDOM_NUMBER = 0;
+    private final static int MAX_RANDOM_NUMBER = 9;
 
     public String calculateFeedback(List<Integer> answer, List<Integer> guess) throws GuessNumberInputSizeNotMatchException, GuessNumberDuplicateNumberException {
         if (answer.size() != guess.size()) {
@@ -42,6 +47,21 @@ public class GuessNumber {
     }
 
     public List<Integer> generateAnswer(int size) {
-        return null;
+        List<Integer> numberList = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            Integer randomNumber = null;
+            boolean isDistinct = false;
+            while (!isDistinct) {
+                randomNumber = generateRandomNumber();
+                isDistinct = !numberList.contains(randomNumber);
+            }
+            numberList.add(randomNumber);
+        }
+        return numberList;
+    }
+
+    private int generateRandomNumber() {
+        Random random = new Random();
+        return random.nextInt((MAX_RANDOM_NUMBER - MIN_RANDOM_NUMBER) + 1) + MIN_RANDOM_NUMBER;
     }
 }
