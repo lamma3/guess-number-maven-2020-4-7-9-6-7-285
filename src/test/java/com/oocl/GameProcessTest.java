@@ -14,8 +14,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
 
-public class AppTest {
+public class GameProcessTest {
 
+    private final InputStream originalIn = System.in;
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
@@ -26,6 +27,7 @@ public class AppTest {
 
     @After
     public void restoreStreams() {
+        System.setIn(originalIn);
         System.setOut(originalOut);
     }
 
@@ -42,7 +44,8 @@ public class AppTest {
 
         input("1 2 3 4" + System.lineSeparator());
 
-        App.play(calculator, new Generator());
+        GameProcess gameProcess = new GameProcess();
+        gameProcess.play(calculator, new Generator());
     }
 
     @Test(expected = GuessNumberGameOverException.class)
@@ -63,7 +66,8 @@ public class AppTest {
                 "1 2 3 4" + System.lineSeparator() +
                 "1 2 3 4" + System.lineSeparator());
 
-        App.play(calculator, new Generator());
+        GameProcess gameProcess = new GameProcess();
+        gameProcess.play(calculator, new Generator());
     }
 
     @Test
@@ -77,7 +81,8 @@ public class AppTest {
         input("1 2 3 4" + System.lineSeparator());
 
         try {
-            App.play(calculator, new Generator());
+            GameProcess gameProcess = new GameProcess();
+            gameProcess.play(calculator, new Generator());
         } catch (GuessNumberGameOverException e) {
             Assert.assertEquals("4A0B" + System.lineSeparator() ,outContent.toString());
         }
@@ -94,7 +99,8 @@ public class AppTest {
         input("1 1 3 4" + System.lineSeparator());
 
         try {
-            App.play(calculator, new Generator());
+            GameProcess gameProcess = new GameProcess();
+            gameProcess.play(calculator, new Generator());
         } catch (GuessNumberGameOverException e) {
             Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() ,outContent.toString());
         }
@@ -111,7 +117,8 @@ public class AppTest {
         input("1 1 3" + System.lineSeparator());
 
         try {
-            App.play(calculator, new Generator());
+            GameProcess gameProcess = new GameProcess();
+            gameProcess.play(calculator, new Generator());
         } catch (GuessNumberGameOverException e) {
             Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() ,outContent.toString());
         }
