@@ -11,20 +11,26 @@ import java.util.Scanner;
 public class App {
 
     private final static int NUMBER_LIST_SIZE = 4;
-    private Scanner scanner = new Scanner(System.in);
+    private final static int MAX_ATTEMPT = 6;
+    private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
-        System.out.println("Hello World!");
+    public static void main(String[] args) throws Exception {
+        play(new Calculator(), new Generator());
     }
 
-    public void play(Calculator calculator, Generator generator) throws GuessNumberGameOverException, GuessNumberDuplicateNumberException, GuessNumberInputSizeNotMatchException {
-        boolean gameover = false;
+    public static void play(Calculator calculator, Generator generator) throws GuessNumberGameOverException, GuessNumberDuplicateNumberException, GuessNumberInputSizeNotMatchException {
         List<Integer> answer = generator.generateAnswer(NUMBER_LIST_SIZE);
-        while (!gameover) {
+
+        boolean gameover = false;
+        int attempt = 0;
+        while (!gameover && scanner.hasNextLine()) {
             String guess = scanner.nextLine();
             List<Integer> guessNumberList = parseGuess(guess);
             String result = calculator.calculateFeedback(answer, guessNumberList);
             if (calculator.isWin(result, NUMBER_LIST_SIZE)) {
+                gameover = true;
+            }
+            if (++attempt >= MAX_ATTEMPT) {
                 gameover = true;
             }
         }
@@ -32,7 +38,7 @@ public class App {
         throw new GuessNumberGameOverException();
     }
 
-    private List<Integer> parseGuess(String guess) {
+    private static List<Integer> parseGuess(String guess) {
         String[] guessSplitBySpace = guess.split(" ");
         List<Integer> numberList = new ArrayList<>();
         for (String numString: guessSplitBySpace) {

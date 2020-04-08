@@ -22,7 +22,27 @@ public class AppTest {
 
         input("1 2 3 4");
 
-        App app = new App();
-        app.play(calculator, new Generator());
+        App.play(calculator, new Generator());
+    }
+
+    @Test(expected = GuessNumberGameOverException.class)
+    public void test_play_when_lose_then_throwGuessNumberGameOverException() throws Exception {
+        Calculator calculator = Mockito.mock(Calculator.class);
+        Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
+                .thenReturn(false)
+                .thenReturn(false)
+                .thenReturn(false)
+                .thenReturn(false)
+                .thenReturn(false)
+                .thenReturn(false);
+
+        input("1 2 3 4" + System.lineSeparator() +
+                "1 2 3 4" + System.lineSeparator() +
+                "1 2 3 4" + System.lineSeparator() +
+                "1 2 3 4" + System.lineSeparator() +
+                "1 2 3 4" + System.lineSeparator() +
+                "1 2 3 4" + System.lineSeparator());
+
+        App.play(calculator, new Generator());
     }
 }
