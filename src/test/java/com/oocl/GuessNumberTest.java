@@ -12,6 +12,8 @@ import java.util.List;
 public class GuessNumberTest {
 
     private final static int NUMBER_LIST_SIZE = 4;
+    private final static int MIN_RANDOM_NUMBER = 0;
+    private final static int MAX_RANDOM_NUMBER = 9;
 
     @Test
     public void test_calculateFeedback_when_noCorrect_then_return0A0B() throws Exception {
@@ -120,11 +122,14 @@ public class GuessNumberTest {
     }
 
     @Test
-    public void test_generateAnswer_when_called_then_returnDifferentRandomNumber() {
+    public void test_generateAnswer_when_called_then_returnDistinctRandomNumberFrom0To9() {
         GuessNumber guessNumber = new GuessNumber();
         List<Integer> numberList1 = guessNumber.generateAnswer(NUMBER_LIST_SIZE);
         List<Integer> numberList2 = guessNumber.generateAnswer(NUMBER_LIST_SIZE);
 
+        for (Integer num: numberList1) {
+            Assert.assertTrue(num >= MIN_RANDOM_NUMBER && num <= MAX_RANDOM_NUMBER);
+        }
         Assert.assertEquals(NUMBER_LIST_SIZE, new HashSet<>(numberList1).size());
         Assert.assertNotEquals(numberList2, numberList1);
     }
