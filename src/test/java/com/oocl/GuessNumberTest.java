@@ -45,4 +45,23 @@ public class GuessNumberTest {
         String result = guessNumber.calculateFeedback(answer, guess);
         Assert.assertEquals("0A1B", result);
     }
+
+    @Test
+    public void test_calculateFeedback_when_1CorrectPosition_then_return1A0B() {
+        List<Integer> answer = new ArrayList<>();
+        answer.add(0);
+        answer.add(0);
+        answer.add(0);
+        answer.add(0);
+
+        List<Integer> guess = new ArrayList<>();
+        guess.add(1);
+        guess.add(1);
+        guess.add(1);
+        guess.add(0);
+
+        GuessNumber guessNumber = new GuessNumber();
+        String result = guessNumber.calculateFeedback(answer, guess);
+        Assert.assertEquals("1A0B", result);
+    }
 }
