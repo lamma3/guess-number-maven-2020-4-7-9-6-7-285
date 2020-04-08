@@ -27,6 +27,7 @@ public class App {
             String guess = scanner.nextLine();
             List<Integer> guessNumberList = parseGuess(guess);
             String result = calculator.calculateFeedback(answer, guessNumberList);
+            System.out.println(result);
             if (calculator.isWin(result, NUMBER_LIST_SIZE)) {
                 gameover = true;
             }
