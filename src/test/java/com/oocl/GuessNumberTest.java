@@ -97,4 +97,22 @@ public class GuessNumberTest {
         GuessNumber guessNumber = new GuessNumber();
         guessNumber.calculateFeedback(answer, guess);
     }
+
+    @Test(expected = GuessNumberDuplicateNumberException.class)
+    public void test_calculateFeedback_when_guessContainsDuplicateNumber_then_throwGuessNumberDuplicateNumberException() throws Exception {
+        List<Integer> answer = new ArrayList<>();
+        answer.add(1);
+        answer.add(2);
+        answer.add(3);
+        answer.add(4);
+
+        List<Integer> guess = new ArrayList<>();
+        guess.add(5);
+        guess.add(5);
+        guess.add(5);
+        guess.add(5);
+
+        GuessNumber guessNumber = new GuessNumber();
+        guessNumber.calculateFeedback(answer, guess);
+    }
 }
