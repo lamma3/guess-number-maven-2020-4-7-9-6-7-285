@@ -1,5 +1,6 @@
 package com.oocl;
 
+import com.oocl.exception.GuessNumberDuplicateNumberException;
 import com.oocl.exception.GuessNumberGameOverException;
 import org.junit.After;
 import org.junit.Assert;
@@ -74,11 +75,27 @@ public class AppTest {
 
         input("1 2 3 4" + System.lineSeparator());
 
-
         try {
             App.play(calculator, new Generator());
         } catch (GuessNumberGameOverException e) {
             Assert.assertEquals("4A0B" + System.lineSeparator() ,outContent.toString());
+        }
+    }
+
+    @Test
+    public void test_play_when_GetGuessNumberDuplicateNumberException_then_printError() throws Exception {
+        Calculator calculator = Mockito.mock(Calculator.class);
+        Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
+                .thenThrow(new GuessNumberDuplicateNumberException());
+        Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
+                .thenReturn(true);
+
+        input("1 1 3 4" + System.lineSeparator());
+
+        try {
+            App.play(calculator, new Generator());
+        } catch (GuessNumberGameOverException e) {
+            Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() ,outContent.toString());
         }
     }
 }
