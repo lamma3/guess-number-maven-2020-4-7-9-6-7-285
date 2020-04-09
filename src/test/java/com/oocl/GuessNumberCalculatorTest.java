@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorTest {
+public class GuessNumberCalculatorTest {
 
     private final static int NUMBER_LIST_SIZE = 4;
     private final static String WIN_RESULT = "4A0B";
@@ -27,7 +27,7 @@ public class CalculatorTest {
         guess.add(7);
         guess.add(8);
 
-        Calculator calculator = new Calculator();
+        GuessNumberCalculator calculator = new GuessNumberCalculator();
         String result = calculator.calculateFeedback(answer, guess);
         Assert.assertEquals("0A0B", result);
     }
@@ -46,7 +46,7 @@ public class CalculatorTest {
         guess.add(7);
         guess.add(1);
 
-        Calculator calculator = new Calculator();
+        GuessNumberCalculator calculator = new GuessNumberCalculator();
         String result = calculator.calculateFeedback(answer, guess);
         Assert.assertEquals("0A1B", result);
     }
@@ -65,7 +65,7 @@ public class CalculatorTest {
         guess.add(7);
         guess.add(8);
 
-        Calculator calculator = new Calculator();
+        GuessNumberCalculator calculator = new GuessNumberCalculator();
         String result = calculator.calculateFeedback(answer, guess);
         Assert.assertEquals("1A0B", result);
     }
@@ -79,7 +79,7 @@ public class CalculatorTest {
         guess.add(1);
         guess.add(2);
 
-        Calculator calculator = new Calculator();
+        GuessNumberCalculator calculator = new GuessNumberCalculator();
         calculator.calculateFeedback(answer, guess);
     }
 
@@ -97,7 +97,7 @@ public class CalculatorTest {
         guess.add(7);
         guess.add(8);
 
-        Calculator calculator = new Calculator();
+        GuessNumberCalculator calculator = new GuessNumberCalculator();
         calculator.calculateFeedback(answer, guess);
     }
 
@@ -115,20 +115,20 @@ public class CalculatorTest {
         guess.add(5);
         guess.add(5);
 
-        Calculator calculator = new Calculator();
+        GuessNumberCalculator calculator = new GuessNumberCalculator();
         calculator.calculateFeedback(answer, guess);
     }
 
     @Test
     public void test_isWin_when_win_then_returnTrue() {
-        Calculator calculator = new Calculator();
+        GuessNumberCalculator calculator = new GuessNumberCalculator();
         boolean result = calculator.isWin(WIN_RESULT, NUMBER_LIST_SIZE);
         Assert.assertTrue(result);
     }
 
     @Test
     public void test_isWin_when_lose_then_returnTrue() {
-        Calculator calculator = new Calculator();
+        GuessNumberCalculator calculator = new GuessNumberCalculator();
         boolean result = calculator.isWin("0A0B", NUMBER_LIST_SIZE);
         Assert.assertFalse(result);
     }

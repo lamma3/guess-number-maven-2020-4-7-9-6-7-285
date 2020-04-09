@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.List;
 
-public class GeneratorTest {
+public class GuessNumberGeneratorTest {
 
     private final static int NUMBER_LIST_SIZE = 4;
     private final static int MIN_RANDOM_NUMBER = 0;
@@ -14,7 +14,7 @@ public class GeneratorTest {
 
     @Test
     public void test_generateAnswer_when_called_then_returnDistinctRandomNumberFrom0To9() {
-        Generator generator = new Generator();
+        GuessNumberGenerator generator = new GuessNumberGenerator();
         List<Integer> numberList1 = generator.generateAnswer(NUMBER_LIST_SIZE);
         List<Integer> numberList2 = generator.generateAnswer(NUMBER_LIST_SIZE);
 
