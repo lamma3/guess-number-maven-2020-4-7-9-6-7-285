@@ -56,14 +56,10 @@ public class GameProcessTest {
         Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
                 .thenReturn("4A0B");
         Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
-                .thenReturn(false)
-                .thenReturn(false)
-                .thenReturn(false)
-                .thenReturn(false)
-                .thenReturn(false)
                 .thenReturn(false);
 
         input("1 2 3 4" + System.lineSeparator() +
+                "1 2 3 4" + System.lineSeparator() +
                 "1 2 3 4" + System.lineSeparator() +
                 "1 2 3 4" + System.lineSeparator() +
                 "1 2 3 4" + System.lineSeparator() +
