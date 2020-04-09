@@ -1,8 +1,6 @@
 package com.oocl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class Generator {
 
@@ -10,17 +8,12 @@ public class Generator {
     private final static int MAX_RANDOM_NUMBER = 9;
 
     public List<Integer> generateAnswer(int size) {
-        List<Integer> numberList = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            Integer randomNumber = null;
-            boolean isDistinct = false;
-            while (!isDistinct) {
-                randomNumber = generateRandomNumber();
-                isDistinct = !numberList.contains(randomNumber);
-            }
-            numberList.add(randomNumber);
+        Set<Integer> numberSet = new HashSet<>();
+        while (numberSet.size() != size) {
+            int randomNumber = generateRandomNumber();
+            numberSet.add(randomNumber);
         }
-        return numberList;
+        return new ArrayList<>(numberSet);
     }
 
     private int generateRandomNumber() {
