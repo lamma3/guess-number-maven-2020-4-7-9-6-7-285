@@ -1,5 +1,6 @@
 package com.oocl;
 
+import com.oocl.calculator.GuessNumberCalculator;
 import com.oocl.exception.GuessNumberDuplicateNumberException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
 import org.junit.Assert;

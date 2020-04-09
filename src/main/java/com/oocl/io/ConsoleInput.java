@@ -1,4 +1,4 @@
-package com.oocl;
+package com.oocl.io;
 
 import java.util.Scanner;
 

@@ -1,5 +1,7 @@
 package com.oocl;
 
+import com.oocl.io.ConsoleInput;
+import com.oocl.io.Input;
 import org.junit.Assert;
 import org.junit.Test;
 

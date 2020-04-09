@@ -1,7 +1,11 @@
 package com.oocl;
 
+import com.oocl.calculator.GuessNumberCalculator;
 import com.oocl.exception.GuessNumberDuplicateNumberException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
+import com.oocl.generator.GuessNumberGenerator;
+import com.oocl.io.ConsoleOutput;
+import com.oocl.io.Input;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -43,10 +47,12 @@ public class GameProcessTest {
         Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
                 .thenReturn(true);
 
-        input("1 2 3 4" + System.lineSeparator());
+        Input input = Mockito.mock(Input.class);
+        Mockito.when(input.get())
+                .thenReturn("1 2 3 4");
 
-        GameProcess gameProcess = new GameProcess();
-        gameProcess.play(calculator, new GuessNumberGenerator());
+        GameProcess gameProcess = new GameProcess(calculator, new GuessNumberGenerator(), input, new ConsoleOutput());
+        gameProcess.play();
         Assert.assertEquals("4A0B" + System.lineSeparator() + "Game Over" + System.lineSeparator(), outContent.toString());
     }
 
@@ -58,16 +64,12 @@ public class GameProcessTest {
         Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
                 .thenReturn(false);
 
-        input("1 2 3 4" + System.lineSeparator() +
-                "1 2 3 4" + System.lineSeparator() +
-                "1 2 3 4" + System.lineSeparator() +
-                "1 2 3 4" + System.lineSeparator() +
-                "1 2 3 4" + System.lineSeparator() +
-                "1 2 3 4" + System.lineSeparator() +
-                "1 2 3 4" + System.lineSeparator());
+        Input input = Mockito.mock(Input.class);
+        Mockito.when(input.get())
+                .thenReturn("1 2 3 4");
 
-        GameProcess gameProcess = new GameProcess();
-        gameProcess.play(calculator, new GuessNumberGenerator());
+        GameProcess gameProcess = new GameProcess(calculator, new GuessNumberGenerator(), input, new ConsoleOutput());
+        gameProcess.play();
         String expected = "4A0B" + System.lineSeparator() +
                 "4A0B" + System.lineSeparator() +
                 "4A0B" + System.lineSeparator() +
@@ -86,10 +88,12 @@ public class GameProcessTest {
         Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
                 .thenReturn(true);
 
-        input("1 2 3 4" + System.lineSeparator());
+        Input input = Mockito.mock(Input.class);
+        Mockito.when(input.get())
+                .thenReturn("1 2 3 4");
 
-        GameProcess gameProcess = new GameProcess();
-        gameProcess.play(calculator, new GuessNumberGenerator());
+        GameProcess gameProcess = new GameProcess(calculator, new GuessNumberGenerator(), input, new ConsoleOutput());
+        gameProcess.play();
         Assert.assertEquals("4A0B" + System.lineSeparator() + "Game Over" + System.lineSeparator(), outContent.toString());
     }
 
@@ -97,29 +101,42 @@ public class GameProcessTest {
     public void test_play_when_GetGuessNumberDuplicateNumberException_then_printError() throws Exception {
         GuessNumberCalculator calculator = Mockito.mock(GuessNumberCalculator.class);
         Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
-                .thenThrow(new GuessNumberDuplicateNumberException());
+                .thenThrow(new GuessNumberDuplicateNumberException())
+                .thenReturn("4A0B");
         Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
                 .thenReturn(true);
 
-        input("1 1 3 4" + System.lineSeparator());
+        Input input = Mockito.mock(Input.class);
+        Mockito.when(input.get())
+                .thenReturn("1 2 3 4");
 
-        GameProcess gameProcess = new GameProcess();
-        gameProcess.play(calculator, new GuessNumberGenerator());
-        Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() + "Game Over" + System.lineSeparator(), outContent.toString());
+        GameProcess gameProcess = new GameProcess(calculator, new GuessNumberGenerator(), input, new ConsoleOutput());
+        gameProcess.play();
+
+        String expected = "Wrong Input, Input again" + System.lineSeparator() +
+                "4A0B" + System.lineSeparator() +
+                "Game Over" + System.lineSeparator();
+        Assert.assertEquals(expected, outContent.toString());
     }
 
     @Test
     public void test_play_when_GetGuessNumberInputSizeNotMatchException_then_printError() throws Exception {
         GuessNumberCalculator calculator = Mockito.mock(GuessNumberCalculator.class);
         Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
-                .thenThrow(new GuessNumberInputSizeNotMatchException());
+                .thenThrow(new GuessNumberInputSizeNotMatchException())
+                .thenReturn("4A0B");
         Mockito.when(calculator.isWin(Mockito.anyString(), Mockito.anyInt()))
                 .thenReturn(true);
 
-        input("1 1 3" + System.lineSeparator());
+        Input input = Mockito.mock(Input.class);
+        Mockito.when(input.get())
+                .thenReturn("1 2 3");
 
-        GameProcess gameProcess = new GameProcess();
-        gameProcess.play(calculator, new GuessNumberGenerator());
-        Assert.assertEquals("Wrong Input, Input again" + System.lineSeparator() + "Game Over" + System.lineSeparator(), outContent.toString());
+        GameProcess gameProcess = new GameProcess(calculator, new GuessNumberGenerator(), input, new ConsoleOutput());
+        gameProcess.play();
+        String expected = "Wrong Input, Input again" + System.lineSeparator() +
+                "4A0B" + System.lineSeparator() +
+                "Game Over" + System.lineSeparator();
+        Assert.assertEquals(expected, outContent.toString());
     }
 }

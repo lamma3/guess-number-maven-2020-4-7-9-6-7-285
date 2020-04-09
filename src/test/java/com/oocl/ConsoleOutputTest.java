@@ -1,5 +1,7 @@
 package com.oocl;
 
+import com.oocl.io.ConsoleOutput;
+import com.oocl.io.Output;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

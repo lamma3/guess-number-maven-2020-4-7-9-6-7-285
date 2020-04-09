@@ -1,4 +1,4 @@
-package com.oocl;
+package com.oocl.calculator;
 
 import com.oocl.exception.GuessNumberDuplicateNumberException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;

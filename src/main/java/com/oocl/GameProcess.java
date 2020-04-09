@@ -1,31 +1,43 @@
 package com.oocl;
 
+import com.oocl.calculator.Calculator;
 import com.oocl.exception.GuessNumberDuplicateNumberException;
 import com.oocl.exception.GuessNumberInputSizeNotMatchException;
+import com.oocl.generator.Generator;
+import com.oocl.io.Input;
+import com.oocl.io.Output;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 public class GameProcess {
 
     private final static int NUMBER_LIST_SIZE = 4;
     private final static int MAX_ATTEMPT = 6;
-    private Scanner scanner = new Scanner(System.in);
     private final static String RETRY_MESSAGE = "Wrong Input, Input again";
     private final static String END_MESSAGE = "Game Over";
 
-    public void play(Calculator calculator, Generator generator) {
-        List<Integer> answer = generator.generateAnswer(NUMBER_LIST_SIZE);
+    private Input input;
+    private Output output;
+    private Calculator calculator;
+    private List<Integer> answer;
 
+    public GameProcess(Calculator calculator, Generator generator, Input input, Output output) {
+        this.input = input;
+        this.output = output;
+        this.calculator = calculator;
+        this.answer = generator.generateAnswer(NUMBER_LIST_SIZE);
+    }
+
+    public void play() {
         boolean gameover = false;
         int attempt = 0;
-        while (!gameover && scanner.hasNextLine()) {
-            String guess = scanner.nextLine();
+        while (!gameover) {
+            String guess = input.get();
             List<Integer> guessNumberList = parseGuess(guess);
             try {
                 String result = calculator.calculateFeedback(answer, guessNumberList);
-                System.out.println(result);
+                output.send(result);
                 if (calculator.isWin(result, NUMBER_LIST_SIZE)) {
                     gameover = true;
                 }
@@ -33,11 +45,11 @@ public class GameProcess {
                     gameover = true;
                 }
             } catch (GuessNumberDuplicateNumberException | GuessNumberInputSizeNotMatchException e) {
-                System.out.println(RETRY_MESSAGE);
+                output.send(RETRY_MESSAGE);
             }
         }
 
-        System.out.println(END_MESSAGE);
+        output.send(END_MESSAGE);
     }
 
     private List<Integer> parseGuess(String guess) {

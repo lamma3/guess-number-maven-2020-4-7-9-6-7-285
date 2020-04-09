@@ -1,5 +1,6 @@
 package com.oocl;
 
+import com.oocl.generator.GuessNumberGenerator;
 import org.junit.Assert;
 import org.junit.Test;
 
