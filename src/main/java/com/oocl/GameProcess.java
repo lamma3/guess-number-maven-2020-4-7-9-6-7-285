@@ -16,6 +16,7 @@ public class GameProcess {
     private final static int MAX_ATTEMPT = 6;
     private final static String RETRY_MESSAGE = "Wrong Input, Input again";
     private final static String END_MESSAGE = "Game Over";
+    private static final String SPACE_DELIMITER = " ";
 
     private Input input;
     private Output output;
@@ -53,7 +54,7 @@ public class GameProcess {
     }
 
     private List<Integer> parseGuess(String guess) {
-        String[] guessSplitBySpace = guess.split(" ");
+        String[] guessSplitBySpace = guess.split(SPACE_DELIMITER);
         List<Integer> numberList = new ArrayList<>();
         for (String numString: guessSplitBySpace) {
             int num = Integer.parseInt(numString);

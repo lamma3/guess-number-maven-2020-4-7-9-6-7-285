@@ -9,6 +9,8 @@ import java.util.stream.IntStream;
 
 public class GuessNumberCalculator implements Calculator {
 
+    private static final String RESULT_FORMAT = "%dA%dB";
+
     public String calculateFeedback(List<Integer> answer, List<Integer> guess) {
         if (answer.size() != guess.size()) {
             throw new GuessNumberInputSizeNotMatchException();
@@ -38,7 +40,7 @@ public class GuessNumberCalculator implements Calculator {
     }
 
     private String formatResult(int numOfCorrectPosition, int numOfWrongPosition) {
-        return String.format("%dA%dB", numOfCorrectPosition, numOfWrongPosition);
+        return String.format(RESULT_FORMAT, numOfCorrectPosition, numOfWrongPosition);
     }
 
     public boolean isWin(String result, int size) {
