@@ -12,7 +12,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -34,13 +33,8 @@ public class GameProcessTest {
         System.setOut(originalOut);
     }
 
-    private void input(String str) {
-        InputStream inputStream = new ByteArrayInputStream(str.getBytes());
-        System.setIn(inputStream);
-    }
-
     @Test
-    public void test_play_when_win_then_throwGuessNumberGameOverException() throws Exception {
+    public void test_play_when_win_then_throwGuessNumberGameOverException() {
         GuessNumberCalculator calculator = Mockito.mock(GuessNumberCalculator.class);
         Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
                 .thenReturn("4A0B");
@@ -57,7 +51,7 @@ public class GameProcessTest {
     }
 
     @Test
-    public void test_play_when_lose_then_throwGuessNumberGameOverException() throws Exception {
+    public void test_play_when_lose_then_throwGuessNumberGameOverException() {
         GuessNumberCalculator calculator = Mockito.mock(GuessNumberCalculator.class);
         Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
                 .thenReturn("4A0B");
@@ -81,7 +75,7 @@ public class GameProcessTest {
     }
 
     @Test
-    public void test_play_when_input_then_returnResult() throws Exception {
+    public void test_play_when_input_then_returnResult() {
         GuessNumberCalculator calculator = Mockito.mock(GuessNumberCalculator.class);
         Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
                 .thenReturn("4A0B");
@@ -98,7 +92,7 @@ public class GameProcessTest {
     }
 
     @Test
-    public void test_play_when_GetGuessNumberDuplicateNumberException_then_printError() throws Exception {
+    public void test_play_when_GetGuessNumberDuplicateNumberException_then_printError() {
         GuessNumberCalculator calculator = Mockito.mock(GuessNumberCalculator.class);
         Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
                 .thenThrow(new GuessNumberDuplicateNumberException())
@@ -120,7 +114,7 @@ public class GameProcessTest {
     }
 
     @Test
-    public void test_play_when_GetGuessNumberInputSizeNotMatchException_then_printError() throws Exception {
+    public void test_play_when_GetGuessNumberInputSizeNotMatchException_then_printError() {
         GuessNumberCalculator calculator = Mockito.mock(GuessNumberCalculator.class);
         Mockito.when(calculator.calculateFeedback(Mockito.anyListOf(Integer.class), Mockito.anyListOf(Integer.class)))
                 .thenThrow(new GuessNumberInputSizeNotMatchException())

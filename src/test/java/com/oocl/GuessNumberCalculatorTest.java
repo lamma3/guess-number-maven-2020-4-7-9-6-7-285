@@ -15,7 +15,7 @@ public class GuessNumberCalculatorTest {
     private final static String WIN_RESULT = "4A0B";
 
     @Test
-    public void test_calculateFeedback_when_noCorrect_then_return0A0B() throws Exception {
+    public void test_calculateFeedback_when_noCorrect_then_return0A0B() {
         List<Integer> answer = new ArrayList<>();
         answer.add(1);
         answer.add(2);
@@ -34,7 +34,7 @@ public class GuessNumberCalculatorTest {
     }
 
     @Test
-    public void test_calculateFeedback_when_1CorrectButWrongPosition_then_return0A1B() throws Exception {
+    public void test_calculateFeedback_when_1CorrectButWrongPosition_then_return0A1B() {
         List<Integer> answer = new ArrayList<>();
         answer.add(1);
         answer.add(2);
@@ -53,7 +53,7 @@ public class GuessNumberCalculatorTest {
     }
 
     @Test
-    public void test_calculateFeedback_when_1CorrectPosition_then_return1A0B() throws Exception {
+    public void test_calculateFeedback_when_1CorrectPosition_then_return1A0B() {
         List<Integer> answer = new ArrayList<>();
         answer.add(1);
         answer.add(2);
@@ -72,7 +72,7 @@ public class GuessNumberCalculatorTest {
     }
 
     @Test(expected = GuessNumberInputSizeNotMatchException.class)
-    public void test_calculateFeedback_when_inputSizeNotMatch_then_throwGuessNumberInputSizeNotMatchException() throws Exception {
+    public void test_calculateFeedback_when_inputSizeNotMatch_then_throwGuessNumberInputSizeNotMatchException() {
         List<Integer> answer = new ArrayList<>();
         answer.add(1);
 
@@ -85,7 +85,7 @@ public class GuessNumberCalculatorTest {
     }
 
     @Test(expected = GuessNumberDuplicateNumberException.class)
-    public void test_calculateFeedback_when_answerContainsDuplicateNumber_then_throwGuessNumberDuplicateNumberException() throws Exception {
+    public void test_calculateFeedback_when_answerContainsDuplicateNumber_then_throwGuessNumberDuplicateNumberException() {
         List<Integer> answer = new ArrayList<>();
         answer.add(1);
         answer.add(1);
@@ -103,7 +103,7 @@ public class GuessNumberCalculatorTest {
     }
 
     @Test(expected = GuessNumberDuplicateNumberException.class)
-    public void test_calculateFeedback_when_guessContainsDuplicateNumber_then_throwGuessNumberDuplicateNumberException() throws Exception {
+    public void test_calculateFeedback_when_guessContainsDuplicateNumber_then_throwGuessNumberDuplicateNumberException() {
         List<Integer> answer = new ArrayList<>();
         answer.add(1);
         answer.add(2);

@@ -9,7 +9,7 @@ import java.util.stream.IntStream;
 
 public class GuessNumberCalculator implements Calculator {
 
-    public String calculateFeedback(List<Integer> answer, List<Integer> guess) throws GuessNumberInputSizeNotMatchException, GuessNumberDuplicateNumberException {
+    public String calculateFeedback(List<Integer> answer, List<Integer> guess) {
         if (answer.size() != guess.size()) {
             throw new GuessNumberInputSizeNotMatchException();
         }

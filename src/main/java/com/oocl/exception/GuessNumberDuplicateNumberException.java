@@ -1,4 +1,4 @@
 package com.oocl.exception;
 
-public class GuessNumberDuplicateNumberException extends Exception {
+public class GuessNumberDuplicateNumberException extends RuntimeException {
 }
