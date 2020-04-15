@@ -12,39 +12,35 @@ import java.util.List;
 
 public class GameProcess {
 
-    private final static int NUMBER_LIST_SIZE = 4;
+    private final static int ANSWER_SIZE = 4;
     private final static int MAX_ATTEMPT = 6;
     private final static String RETRY_MESSAGE = "Wrong Input, Input again";
     private final static String END_MESSAGE = "Game Over";
-    private static final String SPACE_DELIMITER = " ";
+    private final static String SPACE_DELIMITER = " ";
 
     private Input input;
     private Output output;
     private Calculator calculator;
     private List<Integer> answer;
+    private int attempt;
 
     public GameProcess(Calculator calculator, Generator generator, Input input, Output output) {
         this.input = input;
         this.output = output;
         this.calculator = calculator;
-        this.answer = generator.generateAnswer(NUMBER_LIST_SIZE);
+        this.answer = generator.generateAnswer(ANSWER_SIZE);
+        this.attempt = 0;
     }
 
     public void play() {
         boolean gameover = false;
-        int attempt = 0;
         while (!gameover) {
             String guess = input.get();
             List<Integer> guessNumberList = parseGuess(guess);
             try {
                 String result = calculator.calculateFeedback(answer, guessNumberList);
                 output.send(result);
-                if (calculator.isWin(result, NUMBER_LIST_SIZE)) {
-                    gameover = true;
-                }
-                if (++attempt >= MAX_ATTEMPT) {
-                    gameover = true;
-                }
+                gameover = isGameOver(result);
             } catch (GuessNumberDuplicateNumberException | GuessNumberInputSizeNotMatchException e) {
                 output.send(RETRY_MESSAGE);
             }
@@ -55,11 +51,18 @@ public class GameProcess {
 
     private List<Integer> parseGuess(String guess) {
         String[] guessSplitBySpace = guess.split(SPACE_DELIMITER);
-        List<Integer> numberList = new ArrayList<>();
-        for (String numString: guessSplitBySpace) {
-            int num = Integer.parseInt(numString);
-            numberList.add(num);
+        List<Integer> numbers = new ArrayList<>();
+        for (String numberString: guessSplitBySpace) {
+            int number = Integer.parseInt(numberString);
+            numbers.add(number);
         }
-        return numberList;
+        return numbers;
+    }
+
+    private boolean isGameOver(String result) {
+        if (calculator.isWin(result, answer.size())) {
+            return true;
+        }
+        return ++attempt >= MAX_ATTEMPT;
     }
 }

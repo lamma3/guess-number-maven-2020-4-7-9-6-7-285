@@ -18,9 +18,9 @@ public class GuessNumberCalculator implements Calculator {
         if (containsDuplicateNumber(answer) || containsDuplicateNumber(guess)) {
             throw new GuessNumberDuplicateNumberException();
         }
-        int numOfCorrectNumber = getNumberOfCorrectNumber(answer, guess);
-        int numOfCorrectPosition = getNumberOfCorrectPosition(answer, guess);
-        return formatResult(numOfCorrectPosition, numOfCorrectNumber - numOfCorrectPosition);
+        int numberOfCorrectNumber = getNumberOfCorrectNumber(answer, guess);
+        int numberOfCorrectPosition = getNumberOfCorrectPosition(answer, guess);
+        return formatResult(numberOfCorrectPosition, numberOfCorrectNumber - numberOfCorrectPosition);
     }
 
     private boolean containsDuplicateNumber(List<Integer> numberList) {
@@ -39,8 +39,8 @@ public class GuessNumberCalculator implements Calculator {
                 .count();
     }
 
-    private String formatResult(int numOfCorrectPosition, int numOfWrongPosition) {
-        return String.format(RESULT_FORMAT, numOfCorrectPosition, numOfWrongPosition);
+    private String formatResult(int numberOfCorrectPosition, int numberOfWrongPosition) {
+        return String.format(RESULT_FORMAT, numberOfCorrectPosition, numberOfWrongPosition);
     }
 
     public boolean isWin(String result, int size) {
